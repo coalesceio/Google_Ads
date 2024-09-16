@@ -13,7 +13,7 @@
 - Produces modeled tables that leverage Google Ads data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/google-ads) in the format described by [this ERD](https://fivetran.com/docs/applications/google-ads#schemainformation).
 - Enables you to better understand the performance of your ads across varying grains:
   - Providing an account, campaign, ad group, keyword, ad, and utm level reports.
-- Generates a comprehensive data dictionary of your source and modeled Jira data available in your Coalesce Organization Generated Documentation tab. [Environment or Generated Documentation](https://docs.coalesce.io/docs/generated-documentation).
+- Generates a comprehensive data dictionary of your source and modeled Jira data available in your Coalesce Organization [Environment or Generated Documentation](https://docs.coalesce.io/docs/generated-documentation).
 
 
 <!--section="google_ads_transformation_model"-->
