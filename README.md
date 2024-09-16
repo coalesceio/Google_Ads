@@ -22,7 +22,7 @@ You can also refer to the table below for a detailed view of all models material
 | **Model**                | **Description**                                                                                                                                |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **<span style="color:green">GOOGLE_ADS__ACCOUNT_REPORT</span>**          | Each record in this table represents the daily performance at the account level. | 
-|**<span style="color:green">GOOGLE_ADS__CAMPAIGN_REPORT</span>**            | 		Each record in this table represents the daily performance of a campaign at the campaign/advertising_channel/advertising_channel_subtype level. |
+|**<span style="color:green">GOOGLE_ADS__CAMPAIGN_REPORT</span>**            | 		Each record in this table represents the daily performance of a campaign at the campaign/ advertising_channel/ advertising_channel_subtype level. |
 | **<span style="color:green">GOOGLE_ADS__AD_GROUP_REPORT</span>**            | Each record in this table represents the daily performance at the ad group level.|
 | **<span style="color:green">GOOGLE_ADS__KEYWORD_REPORT</span>**            |Each record in this table represents the daily performance at the ad group level for keywords.|
 | **<span style="color:green">GOOGLE_ADS__AD_REPORT</span>**            |Each record in this table represents the daily performance at the ad level.|
