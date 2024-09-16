@@ -98,16 +98,14 @@ The pipeline equires four Storage Locations be created.
 Environments must be configured in order to deploy pipeline to higher level environments (QA, UAT, Pre-Prod, Prod, etc.) based on how you are managing your environments.
 
 ### Workspace Settings
-The only difference between the `google_ads_dynamic_model ` and `google_ads_incremental` versions of the Google Ads pipeline is that the google_ads_dynamic_model version requires some parameters to be created and set.  Other than that the configuration is the same between them.
+The only difference between the `google_ads_dynamic_model ` and `google_ads_incremental` versions of the Google Ads pipeline is that the `google_ads_dynamic_model` version requires some parameters to be created and set.  Other than that the configuration is the same between them.
 
 - **Settings** - Configure the Snowflake account that Coalesce will be utilizing
 - **User Credentials / OAuth Settings** - Enter the credentials required to connect to Snowflake
 - **Storage Mappings** - This can be configured to use one database / schema for all Storage Locations or up to four database / schema mappings, one for each Storage Location, depending on whether or not you want to seperate Source, Staging, Intermediate and Target objects.
-- **Parameters** - The Dynamic Tables in the Google Ads pipeline require two Parameters to function.  
-
-    The first, `targetDynamicTableWarehouse` is the standard Dynamic Table Parameter described in the Dynamic Table Package documentation.  
-    
-    The second one, `GoogleAdsPipelineWarehouse` is specific to this pipeline.  It allows you to set a warehouse for the entire pipeline using a parameter instead of configuring individual nodes.  
+- **Parameters** - The Dynamic Tables in the Google Ads pipeline require two Parameters to function.
+    - `targetDynamicTableWarehouse` is the standard Dynamic Table Parameter described in the Dynamic Table Package documentation.
+    - `GoogleAdsPipelineWarehouse` is specific to this pipeline.  It allows you to set a warehouse for the entire pipeline using a parameter instead of configuring individual nodes.  
     
     This parameter can be used or individual nodes can have their configs updated to use different warehouses.
 
@@ -131,7 +129,7 @@ The target lag of the pipeline can be changed by changing the `Lag Specification
 Alternatively, individual nodes could be changed from Downstream to a Lag Specification.
 
 ### Missing Sources
-If there are sources not available in your specific case  nodes related to those areas can be deleted from the pipeline.  This will require modification of any downstream objects that rely on sources, but should be quick to figure out utilizing Coalesce object and column level lineage capabilities.
+If there are sources not available in your specific case nodes related to those areas can be deleted from the pipeline. This will require modification of any downstream objects that rely on sources, but should be quick to figure out utilizing Coalesce object and column level lineage capabilities.
 
 ### Executing Pipeline
 
@@ -148,14 +146,13 @@ Dynamic Tables are DDL only Snowflake objects, meaning there is no `Run` compone
 The pipeline is comprised of 10 sources and 28 tables.  
 
 ### Missing Sources
-If there are sources not available in your specific case nodes related to those areas can be deleted from the pipeline.  This will require modification of any downstream objects that rely on sources, but should be quick to figure out utilizing Coalesce object and column level lineage capabilities.
+If there are sources not available in your specific case nodes related to those areas can be deleted from the pipeline. This will require modification of any downstream objects that rely on sources, but should be quick to figure out utilizing Coalesce object and column level lineage capabilities.
 
 ### Executing Pipeline
 
 After the Workspace has been configured commit any changes into Git.  If the only changes have been Build Settings and Workspace Settings then there may be nothing to commit.
 
 At this point you can create the pipeline.  The easiest way to do this is select `Create All` and then you can execute with `Run All` from the Graph action menu.
-
 
 From here you can deploy to higher level environments, assuming you have created environments, utilizing the standard Coalesce deployment mechanisms.
 
