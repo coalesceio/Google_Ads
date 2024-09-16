@@ -97,7 +97,7 @@ The pipeline equires four Storage Locations be created.
 #### Environments
 Environments must be configured in order to deploy pipeline to higher level environments (QA, UAT, Pre-Prod, Prod, etc.) based on how you are managing your environments.
 
-### ⚙️Workspace Settings
+### Workspace Settings
 The only difference between the `google_ads_dynamic_model ` and `google_ads_incremental` versions of the Google Ads pipeline is that the google_ads_dynamic_model version requires some parameters to be created and set.  Other than that the configuration is the same between them.
 
 - **Settings** - Configure the Snowflake account that Coalesce will be utilizing
