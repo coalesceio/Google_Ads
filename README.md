@@ -13,7 +13,7 @@
 - Produces modeled tables that leverage Google Ads data from [Fivetran's connector](https://fivetran.com/docs/connectors/applications/google-ads) in the format described by [this ERD](https://fivetran.com/docs/applications/google-ads#schemainformation).
 - Enables you to better understand the performance of your ads across varying grains:
   - Providing an account, campaign, ad group, keyword, ad, and utm level reports.
-- Generates a comprehensive data dictionary of your source and modeled Jira data available in your Coalesce Organization Generated Documentation tab. [Environment or Generated Documentation](https://docs.coalesce.io/docs/generated-documentation).
+- Generates a comprehensive data dictionary of your source and modeled Jira data available in your Coalesce Organization [Environment or Generated Documentation](https://docs.coalesce.io/docs/generated-documentation).
 
 
 <!--section="google_ads_transformation_model"-->
@@ -22,7 +22,7 @@ You can also refer to the table below for a detailed view of all models material
 | **Model**                | **Description**                                                                                                                                |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **<span style="color:green">GOOGLE_ADS__ACCOUNT_REPORT</span>**          | Each record in this table represents the daily performance at the account level. | 
-|**<span style="color:green">GOOGLE_ADS__CAMPAIGN_REPORT</span>**            | 		Each record in this table represents the daily performance of a campaign at the campaign/advertising_channel/advertising_channel_subtype level. |
+|**<span style="color:green">GOOGLE_ADS__CAMPAIGN_REPORT</span>**            | 		Each record in this table represents the daily performance of a campaign at the campaign/ advertising_channel/ advertising_channel_subtype level. |
 | **<span style="color:green">GOOGLE_ADS__AD_GROUP_REPORT</span>**            | Each record in this table represents the daily performance at the ad group level.|
 | **<span style="color:green">GOOGLE_ADS__KEYWORD_REPORT</span>**            |Each record in this table represents the daily performance at the ad group level for keywords.|
 | **<span style="color:green">GOOGLE_ADS__AD_REPORT</span>**            |Each record in this table represents the daily performance at the ad level.|
@@ -42,13 +42,11 @@ To use this Coalesce pipeline, you must have the following:
   - [Dynamic Tables](https://docs.coalesce.io/page/package_coalesce_dynamic-tables) (version 1.1.3+)
 
 ## Step 2: Import the coalesceio Google Ads repository
-In Github select create a new repository and select `Import a repository`.
 
-The URL for the Google Ads repository is [Google Ads ](https://github.com/coalesceio/Google_Ads.git).  This is a Public repository so no credentials are required.
-
-Select an owner and give your repository a name.
-
-After the import is complete you will see two branches available:
+1. In Github select create a new repository and select `Import a repository`.
+2. The URL for the Google Ads repository is [Google Ads ](https://github.com/coalesceio/Google_Ads.git).  This is a Public repository so no credentials are required.
+3. Select an owner and give your repository a name.
+4. After the import is complete you will see two branches available:
 
 - **google_ads_dynamic_model** - This is an entire pipeline of Dynamic Tables to manage the Google Ads pipeline.
 - **google_ads_incremental** - This is a pipeline built with an incremental node that loads the incremental data.
@@ -56,29 +54,20 @@ After the import is complete you will see two branches available:
 Either branch can be selected when setting up a Workspace which will be described below.
 
 ## Step 3: Set up a Project / Workspace in Coalesce
-After the Git repo has been imported follow the Coalesce [documentation](https://docs.coalesce.io/docs/projects#create-a-new-project) to create a new project.  Initially, choose the option `Skip and Create` in the window for `Setup Version Control`.  We will connect to the Git repository after creating a Workspace.
 
-Once the Project has been created select `Create Workspace`.  Enter a name and meaninful desription based on the Git branch you want to start from, either Dynamic Table or full load based.
+1. After the Git repo has been imported follow the Coalesce [documentation](https://docs.coalesce.io/docs/projects#create-a-new-project) to create a new project.  Initially, choose the option `Skip and Create` in the window for `Setup Version Control`.  We will connect to the Git repository after creating a Workspace.
+2. Once the Project has been created select `Create Workspace`.  Enter a name and meaninful desription based on the Git branch you want to start from, either Dynamic Table or full load based.
+3. At this point we are going to set up version control.  Select `Project Settings` and in the [Git Repository](https://docs.coalesce.io/docs/changing-a-git-repository-in-coalesce) section enter the URL of the repository you imported into your Git account as the Git Repository URL.
+4. Save the `Project Settings`.
+5. If you have enabled security for your Git repo, [Configure Git Account](https://docs.coalesce.io/docs/set-up-your-git-integration#add-through-the-project-dashboard).
+6. After configuring the Git repo select `Launch` to launch the Workspace so we can attach it to a Git branch.
+7. A Workspace can be attached to a branch by either selecting the `Git` modal or selecting `git branch` from the Workspace warning message `"Finish setting up version control for this workspace and avoid losing any work. Attach this workspace to a git branch"`.
+8. After the `Attach Workspace to Branch` opens select the desired branch - **google_ads_dynamic_model** or **google_ads_incremental** to attach and `Attach` it.
+9. Click on the `Git` modal, navigate to the `Branches` tab and select the [Branch Action](https://docs.coalesce.io/docs/git-branches#branch-actions) `Force Checkout` to populate the workspace with the latest Git commit.
+10. This will overwrite any uncommitted work in the Workspace, which is what we want, so you will be required to confirm the Force Checkout by typing **FORCE** in the screen.
+11. At this point the DAG objects should appear in your Workspace with errors.  Some workspace configuration is required to fix these errors.
 
-At this point we are going to set up version control.  Select `Project Settings` and in the [Git Repository](https://docs.coalesce.io/docs/changing-a-git-repository-in-coalesce) section enter the URL of the repository you imported into your Git account as the Git Repository URL.
-
-Save the `Project Settings`.
-
-If you have enabled security for your Git repo, [Configure Git Account](https://docs.coalesce.io/docs/set-up-your-git-integration#add-through-the-project-dashboard).
-
-After configuring the Git repo select `Launch` to launch the Workspace so we can attach it to a Git branch.
-
-A Workspace can be attached to a branch by either selecting the `Git` modal or selecting `git branch` from the Workspace warning message `"Finish setting up version control for this workspace and avoid losing any work. Attach this workspace to a git branch"`.
-
-After the `Attach Workspace to Branch` opens select the desired branch - **google_ads_dynamic_model** or **google_ads_incremental** to attach and `Attach` it.
-
-Click on the `Git` modal, navigate to the `Branches` tab and select the [Branch Action](https://docs.coalesce.io/docs/git-branches#branch-actions) `Force Checkout` to populate the workspace with the latest Git commit.
-
-This will overwrite any uncommitted work in the Workspace, which is what we want, so you will be required to confirm the Force Checkout by typing **FORCE** in the screen.
-
-At this point the DAG objects should appear in your Workspace with errors.  Some workspace configuration is required to fix these errors.
-
-## Step 3: Workspace Configuration 🛠️
+## Step 4: Workspace Configuration
 
 In this section you will configure the following Workspace settings:
 - **Build Settings** - Configure [Storage Locations](https://docs.coalesce.io/docs/storage-locations-and-storage-mappings)
@@ -96,17 +85,15 @@ The pipeline equires four Storage Locations be created.
 #### Environments
 Environments must be configured in order to deploy pipeline to higher level environments (QA, UAT, Pre-Prod, Prod, etc.) based on how you are managing your environments.
 
-### ⚙️Workspace Settings
-The only difference between the `google_ads_dynamic_model ` and `google_ads_incremental` versions of the Google Ads pipeline is that the google_ads_dynamic_model version requires some parameters to be created and set.  Other than that the configuration is the same between them.
+### Workspace Settings
+The only difference between the `google_ads_dynamic_model ` and `google_ads_incremental` versions of the Google Ads pipeline is that the `google_ads_dynamic_model` version requires some parameters to be created and set.  Other than that the configuration is the same between them.
 
 - **Settings** - Configure the Snowflake account that Coalesce will be utilizing
 - **User Credentials / OAuth Settings** - Enter the credentials required to connect to Snowflake
 - **Storage Mappings** - This can be configured to use one database / schema for all Storage Locations or up to four database / schema mappings, one for each Storage Location, depending on whether or not you want to seperate Source, Staging, Intermediate and Target objects.
-- **Parameters** - The Dynamic Tables in the Google Ads pipeline require two Parameters to function.  
-
-    The first, `targetDynamicTableWarehouse` is the standard Dynamic Table Parameter described in the Dynamic Table Package documentation.  
-    
-    The second one, `GoogleAdsPipelineWarehouse` is specific to this pipeline.  It allows you to set a warehouse for the entire pipeline using a parameter instead of configuring individual nodes.  
+- **Parameters** - The Dynamic Tables in the Google Ads pipeline require two Parameters to function.
+    - `targetDynamicTableWarehouse` is the standard Dynamic Table Parameter described in the Dynamic Table Package documentation.
+    - `GoogleAdsPipelineWarehouse` is specific to this pipeline.  It allows you to set a warehouse for the entire pipeline using a parameter instead of configuring individual nodes.  
     
     This parameter can be used or individual nodes can have their configs updated to use different warehouses.
 
@@ -130,7 +117,7 @@ The target lag of the pipeline can be changed by changing the `Lag Specification
 Alternatively, individual nodes could be changed from Downstream to a Lag Specification.
 
 ### Missing Sources
-If there are sources not available in your specific case  nodes related to those areas can be deleted from the pipeline.  This will require modification of any downstream objects that rely on sources, but should be quick to figure out utilizing Coalesce object and column level lineage capabilities.
+If there are sources not available in your specific case nodes related to those areas can be deleted from the pipeline. This will require modification of any downstream objects that rely on sources, but should be quick to figure out utilizing Coalesce object and column level lineage capabilities.
 
 ### Executing Pipeline
 
@@ -147,14 +134,13 @@ Dynamic Tables are DDL only Snowflake objects, meaning there is no `Run` compone
 The pipeline is comprised of 10 sources and 28 tables.  
 
 ### Missing Sources
-If there are sources not available in your specific case nodes related to those areas can be deleted from the pipeline.  This will require modification of any downstream objects that rely on sources, but should be quick to figure out utilizing Coalesce object and column level lineage capabilities.
+If there are sources not available in your specific case nodes related to those areas can be deleted from the pipeline. This will require modification of any downstream objects that rely on sources, but should be quick to figure out utilizing Coalesce object and column level lineage capabilities.
 
 ### Executing Pipeline
 
 After the Workspace has been configured commit any changes into Git.  If the only changes have been Build Settings and Workspace Settings then there may be nothing to commit.
 
 At this point you can create the pipeline.  The easiest way to do this is select `Create All` and then you can execute with `Run All` from the Graph action menu.
-
 
 From here you can deploy to higher level environments, assuming you have created environments, utilizing the standard Coalesce deployment mechanisms.
 
